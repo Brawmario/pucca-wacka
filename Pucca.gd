@@ -36,6 +36,10 @@ func start_game() -> void:
 	$Circle.clickable = true
 	move_random()
 
+func end_game() -> void:
+	visible = false
+	$Circle.clickable = false
+
 
 func _on_Circle_clicked() -> void:
 	kill_pucca()

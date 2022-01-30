@@ -206,7 +206,6 @@ __meta__ = {
 }
 
 [node name="GameUI" type="Control" parent="."]
-visible = false
 margin_right = 446.0
 margin_bottom = 148.0
 __meta__ = {
@@ -225,6 +224,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TimerLabel" type="RichTextLabel" parent="GameUI"]
+margin_left = 285.0
+margin_top = 1.0
+margin_right = 486.0
+margin_bottom = 53.0
+custom_fonts/normal_font = ExtResource( 6 )
+bbcode_enabled = true
+bbcode_text = "[color=#32CD32]Timer: 30[/color]"
+text = "Timer: 30"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameTimer" type="Timer" parent="."]
+wait_time = 30.0
+
 [connection signal="scored" from="Pucca" to="." method="_on_Pucca_scored"]
 [connection signal="clicked" from="Pucca/Circle" to="Pucca" method="_on_Circle_clicked"]
 [connection signal="input_event" from="Pucca/Circle" to="Pucca/Circle" method="_on_Circle_input_event"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]
