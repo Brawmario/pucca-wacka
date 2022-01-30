@@ -10,13 +10,13 @@ onready var limit_sw: Position2D = get_node("../LimitSW")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Circle.clickable = true
-	move_random()
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
 
 func move_random():
 	position.x = rand_range(limit_nw.position.x, limit_ne.position.x)
@@ -30,6 +30,11 @@ func kill_pucca():
 	yield($ExplosionPlayer, "animation_finished")
 	move_random()
 	$Circle.clickable = true
+	
+func start_game() -> void:
+	visible = true
+	$Circle.clickable = true
+	move_random()
 
 
 func _on_Circle_clicked() -> void:

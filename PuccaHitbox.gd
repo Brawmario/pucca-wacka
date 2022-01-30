@@ -2,7 +2,7 @@ extends Area2D
 
 signal clicked
 
-var clickable := true
+var clickable := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
