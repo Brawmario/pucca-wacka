@@ -198,41 +198,72 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="MainMenu" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="GameUI" type="Control" parent="."]
-margin_right = 446.0
-margin_bottom = 148.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="GameUI" type="CanvasLayer" parent="."]
 
 [node name="ScoreLabel" type="RichTextLabel" parent="GameUI"]
-margin_left = 4.0
-margin_right = 249.0
-margin_bottom = 91.0
+visible = false
+anchor_right = 1.0
+margin_bottom = 50.0
+custom_colors/default_color = Color( 0.196078, 0.803922, 0.196078, 1 )
 custom_fonts/normal_font = ExtResource( 6 )
 bbcode_enabled = true
-bbcode_text = "[color=#32CD32]Score: 0[/color]"
+bbcode_text = "Score: 0"
 text = "Score: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TimerLabel" type="RichTextLabel" parent="GameUI"]
-margin_left = 285.0
-margin_top = 1.0
-margin_right = 486.0
-margin_bottom = 53.0
-custom_fonts/normal_font = ExtResource( 6 )
-bbcode_enabled = true
-bbcode_text = "[color=#32CD32]Timer: 30[/color]"
+[node name="TimerLabel" type="Label" parent="GameUI"]
+visible = false
+anchor_right = 1.0
+margin_bottom = 48.0
+custom_colors/font_color = Color( 0.196078, 0.803922, 0.196078, 1 )
+custom_fonts/font = ExtResource( 6 )
 text = "Timer: 30"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="GameUI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -46.0
+margin_top = -27.0
+margin_right = 46.0
+margin_bottom = 27.0
+custom_fonts/font = ExtResource( 6 )
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLabel" type="Label" parent="GameUI"]
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 0.5
+anchor_bottom = 0.25
+margin_left = -129.0
+margin_right = 129.0
+margin_bottom = 48.0
+custom_fonts/font = ExtResource( 6 )
+text = "Mate o Pucca"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HighScoreLabel" type="Label" parent="GameUI"]
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+margin_left = -132.0
+margin_top = -48.0
+margin_right = 132.0
+custom_fonts/font = ExtResource( 6 )
+text = "High Score: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -243,4 +274,5 @@ wait_time = 30.0
 [connection signal="scored" from="Pucca" to="." method="_on_Pucca_scored"]
 [connection signal="clicked" from="Pucca/Circle" to="Pucca" method="_on_Circle_clicked"]
 [connection signal="input_event" from="Pucca/Circle" to="Pucca/Circle" method="_on_Circle_input_event"]
+[connection signal="pressed" from="GameUI/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]
