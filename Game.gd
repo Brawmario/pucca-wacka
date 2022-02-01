@@ -21,18 +21,25 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if timer_label.visible:
-		timer_label.text = "Timer: " + str(ceil(game_timer.time_left))
+		timer_label.text = "Timer: " + str(floor(game_timer.time_left))
 
-func update_score() -> void:
-	score += 1
-	score_label.bbcode_text = "[wave amp=50 freq=40]Score: " + str(score) + "[/wave]"
-	yield(get_tree().create_timer(0.2), "timeout")
+func update_score(amount: int) -> void:
+	score += amount
+	if amount > 0:
+		score_label.bbcode_text = "[wave amp=50 freq=40]Score: " + str(score) + "[/wave]"
+		yield(get_tree().create_timer(0.2), "timeout")
+	else:
+		var perdi: RichTextLabel = $GameUI/PerdiLabel.duplicate()
+		perdi.add_to_group("perdi")
+		perdi.rect_position = Vector2(rand_range(0, 480), rand_range(0, 720))
+		$GameUI.add_child(perdi)
+		perdi.show()
 	score_label.bbcode_text = "Score: " + str(score)
-
 
 
 func start_game() -> void:
 	$Pucca.start_game()
+	$NegaPucca.start_game()
 	score = 0
 	score_label.bbcode_text = "Score: 0"
 	timer_label.visible = true
@@ -42,6 +49,8 @@ func start_game() -> void:
 
 func end_game() -> void:
 	$Pucca.end_game()
+	$NegaPucca.end_game()
+
 	update_high_score()
 
 	timer_label.visible = false
@@ -51,14 +60,13 @@ func end_game() -> void:
 	title_label.visible = true
 	high_score_label.visible = true
 
+	for perdi in get_tree().get_nodes_in_group("perdi"):
+		perdi.queue_free()
+
 
 func update_high_score() -> void:
 	high_score = max(high_score, score)
 	high_score_label.text = "High Score: " + str(high_score)
-
-
-func _on_Pucca_scored() -> void:
-	update_score()
 
 
 func _on_GameTimer_timeout():
@@ -71,3 +79,11 @@ func _on_PlayButton_pressed() -> void:
 	title_label.visible = false
 	high_score_label.visible = false
 	start_game()
+
+
+func _on_Pucca_cliked(pucca_type) -> void:
+	update_score(1)
+
+
+func _on_NegaPucca_cliked(pucca_type) -> void:
+	update_score(-1)

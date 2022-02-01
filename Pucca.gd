@@ -1,11 +1,20 @@
 extends Sprite
+class_name Pucca
 
-signal scored
+
+enum PuccaType {
+	PUCCA,
+	NEGA_PUCCA,
+}
+
+signal cliked(pucca_type)
 
 onready var limit_nw: Position2D = get_node("../LimitNW")
 onready var limit_ne: Position2D = get_node("../LimitNE")
 onready var limit_se: Position2D = get_node("../LimitSE")
 onready var limit_sw: Position2D = get_node("../LimitSW")
+
+export var pucca_type := PuccaType.PUCCA
 
 
 # Called when the node enters the scene tree for the first time.
@@ -24,17 +33,22 @@ func move_random():
 
 
 func kill_pucca():
-	$Circle.clickable = false
-	emit_signal("scored")
+	var puccas: Array = get_tree().get_nodes_in_group("pucca")
+	for pucca in puccas:
+		pucca.get_node("Circle").clickable = false
+	emit_signal("cliked", pucca_type)
 	$ExplosionPlayer.play("Explode")
 	yield($ExplosionPlayer, "animation_finished")
-	move_random()
-	$Circle.clickable = true
-	
+	for pucca in puccas:
+		pucca.move_random()
+		pucca.get_node("Circle").clickable = true
+
+
 func start_game() -> void:
 	visible = true
 	$Circle.clickable = true
 	move_random()
+
 
 func end_game() -> void:
 	visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://Pucca.gd" type="Script" id=2]
@@ -7,9 +7,6 @@
 [ext_resource path="res://explosion.png" type="Texture" id=5]
 [ext_resource path="res://STL.tres" type="DynamicFont" id=6]
 [ext_resource path="res://explosion.ogg" type="AudioStream" id=7]
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 360.596
 
 [sub_resource type="Animation" id=2]
 resource_name = "Explode"
@@ -129,12 +126,129 @@ tracks/1/keys = {
 "values": [ -360.0 ]
 }
 
+[sub_resource type="Animation" id=6]
+resource_name = "Explode"
+length = 1.7
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("..:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -360.0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Hide"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -360.0 ]
+}
+
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Pucca" type="Sprite" parent="."]
+[node name="Pucca" type="Sprite" parent="." groups=["pucca"]]
 visible = false
-position = Vector2( 271, 337 )
 rotation = 6.28319
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 4 )
@@ -146,9 +260,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pucca/Circle"]
-position = Vector2( -63.1478, -3.40674 )
-shape = SubResource( 1 )
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Pucca/Circle"]
+polygon = PoolVector2Array( -80.0016, -364, 19.9984, -352, 103.999, -320, 171.999, -272.001, 227.999, -212.001, 259.999, -156.001, 284, -92.0013, 296, -16.0013, 296, 51.9987, 284, 95.9987, 324, 107.999, 420.001, 183.998, 424.001, 239.998, 416.001, 255.998, 372.001, 263.998, 268.001, 223.999, 220.001, 263.999, 200.001, 247.999, 148.001, 291.999, 92.0015, 328, 24.0016, 352, -39.9984, 364, -127.998, 360.001, -203.999, 336.001, -271.999, 300.001, -327.999, 252.001, -375.999, 188.002, -412, 112.002, -428, 36.0019, -424, -51.9981, -404.001, -135.998, -356.001, -215.998, -296.001, -279.999, -224.001, -327.999, -156.002, -351.999 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -171,6 +284,48 @@ vframes = 4
 frame = 16
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Pucca"]
+stream = ExtResource( 7 )
+volume_db = -20.0
+
+[node name="NegaPucca" type="Sprite" parent="." groups=["pucca"]]
+visible = false
+modulate = Color( 1, 0, 0, 1 )
+rotation = 6.28319
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 4 )
+script = ExtResource( 2 )
+pucca_type = 1
+
+[node name="Circle" type="Area2D" parent="NegaPucca"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="NegaPucca/Circle"]
+polygon = PoolVector2Array( -80.0016, -364, 19.9984, -352, 103.999, -320, 171.999, -272.001, 227.999, -212.001, 259.999, -156.001, 284, -92.0013, 296, -16.0013, 296, 51.9987, 284, 95.9987, 324, 107.999, 420.001, 183.998, 424.001, 239.998, 416.001, 255.998, 372.001, 263.998, 268.001, 223.999, 220.001, 263.999, 200.001, 247.999, 148.001, 291.999, 92.0015, 328, 24.0016, 352, -39.9984, 364, -127.998, 360.001, -203.999, 336.001, -271.999, 300.001, -327.999, 252.001, -375.999, 188.002, -412, 112.002, -428, 36.0019, -424, -51.9981, -404.001, -135.998, -356.001, -215.998, -296.001, -279.999, -224.001, -327.999, -156.002, -351.999 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ExplosionPlayer" type="AnimationPlayer" parent="NegaPucca"]
+root_node = NodePath("../ExplosionSheet")
+playback_speed = 4.0
+anims/Explode = SubResource( 6 )
+anims/Hide = SubResource( 7 )
+anims/RESET = SubResource( 8 )
+
+[node name="ExplosionSheet" type="Sprite" parent="NegaPucca"]
+visible = false
+position = Vector2( -48.5714, -70.1749 )
+rotation = -6.28319
+scale = Vector2( 4.67143, 4.40125 )
+texture = ExtResource( 5 )
+hframes = 5
+vframes = 4
+frame = 16
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="NegaPucca"]
 stream = ExtResource( 7 )
 volume_db = -20.0
 
@@ -268,11 +423,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="PerdiLabel" type="RichTextLabel" parent="GameUI"]
+visible = false
+margin_top = 7.0
+margin_right = 119.0
+margin_bottom = 107.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 6 )
+bbcode_enabled = true
+bbcode_text = "
+[wave amp=100 freq=10][rainbow freq=0.5 sat=2 val=20]Perdi[/rainbow][/wave]"
+text = "
+Perdi"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="GameTimer" type="Timer" parent="."]
 wait_time = 30.0
 
-[connection signal="scored" from="Pucca" to="." method="_on_Pucca_scored"]
+[connection signal="cliked" from="Pucca" to="." method="_on_Pucca_cliked"]
 [connection signal="clicked" from="Pucca/Circle" to="Pucca" method="_on_Circle_clicked"]
 [connection signal="input_event" from="Pucca/Circle" to="Pucca/Circle" method="_on_Circle_input_event"]
+[connection signal="cliked" from="NegaPucca" to="." method="_on_NegaPucca_cliked"]
+[connection signal="clicked" from="NegaPucca/Circle" to="NegaPucca" method="_on_Circle_clicked"]
+[connection signal="input_event" from="NegaPucca/Circle" to="NegaPucca/Circle" method="_on_Circle_input_event"]
 [connection signal="pressed" from="GameUI/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]
