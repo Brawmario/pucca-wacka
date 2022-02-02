@@ -15,6 +15,9 @@ onready var game_timer: Timer = $GameTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+#	for pucca in get_tree().get_nodes_in_group("pucca"):
+#		var error = pucca.connect("clicked", self, "_on_pucca_cliked")
+#		print(error)
 	pass
 
 
@@ -22,6 +25,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if timer_label.visible:
 		timer_label.text = "Timer: " + str(floor(game_timer.time_left))
+
 
 func update_score(amount: int) -> void:
 	score += amount
@@ -31,15 +35,15 @@ func update_score(amount: int) -> void:
 	else:
 		var perdi: RichTextLabel = $GameUI/PerdiLabel.duplicate()
 		perdi.add_to_group("perdi")
-		perdi.rect_position = Vector2(rand_range(0, 480), rand_range(0, 720))
+		perdi.rect_position = Vector2(rand_range(0, 480 - 100), rand_range(0, 720 - 100))
 		$GameUI.add_child(perdi)
 		perdi.show()
 	score_label.bbcode_text = "Score: " + str(score)
 
 
 func start_game() -> void:
-	$Pucca.start_game()
-	$NegaPucca.start_game()
+	for pucca in get_tree().get_nodes_in_group("pucca"):
+		pucca.start_game()
 	score = 0
 	score_label.bbcode_text = "Score: 0"
 	timer_label.visible = true
@@ -48,8 +52,8 @@ func start_game() -> void:
 
 
 func end_game() -> void:
-	$Pucca.end_game()
-	$NegaPucca.end_game()
+	for pucca in get_tree().get_nodes_in_group("pucca"):
+		pucca.end_game()
 
 	update_high_score()
 
@@ -79,6 +83,14 @@ func _on_PlayButton_pressed() -> void:
 	title_label.visible = false
 	high_score_label.visible = false
 	start_game()
+
+
+#func _on_pucca_cliked(pucca_type) -> void:
+#	match pucca_type:
+#		Pucca.PuccaType.PUCCA:
+#			update_score(1)
+#		Pucca.PuccaType.NEGA_PUCCA:
+#			update_score(-1)
 
 
 func _on_Pucca_cliked(pucca_type) -> void:
