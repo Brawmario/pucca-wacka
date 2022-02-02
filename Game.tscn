@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://Pucca.tscn" type="PackedScene" id=2]
-[ext_resource path="res://STL.tres" type="DynamicFont" id=6]
+[ext_resource path="res://GameUI.tscn" type="PackedScene" id=3]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,95 +15,12 @@ visible = false
 self_modulate = Color( 1, 0, 0, 1 )
 pucca_type = 1
 
-[node name="GameUI" type="CanvasLayer" parent="."]
-
-[node name="ScoreLabel" type="RichTextLabel" parent="GameUI"]
-visible = false
-anchor_right = 1.0
-margin_bottom = 50.0
-custom_colors/default_color = Color( 0.196078, 0.803922, 0.196078, 1 )
-custom_fonts/normal_font = ExtResource( 6 )
-bbcode_enabled = true
-bbcode_text = "Score: 0"
-text = "Score: 0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TimerLabel" type="Label" parent="GameUI"]
-visible = false
-anchor_right = 1.0
-margin_bottom = 48.0
-custom_colors/font_color = Color( 0.196078, 0.803922, 0.196078, 1 )
-custom_fonts/font = ExtResource( 6 )
-text = "Timer: 30"
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PlayButton" type="Button" parent="GameUI"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -46.0
-margin_top = -27.0
-margin_right = 46.0
-margin_bottom = 27.0
-custom_fonts/font = ExtResource( 6 )
-text = "Play"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TitleLabel" type="Label" parent="GameUI"]
-anchor_left = 0.5
-anchor_top = 0.25
-anchor_right = 0.5
-anchor_bottom = 0.25
-margin_left = -129.0
-margin_right = 129.0
-margin_bottom = 48.0
-custom_fonts/font = ExtResource( 6 )
-text = "Mate o Pucca"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HighScoreLabel" type="Label" parent="GameUI"]
-anchor_left = 0.5
-anchor_top = 0.75
-anchor_right = 0.5
-anchor_bottom = 0.75
-margin_left = -132.0
-margin_top = -48.0
-margin_right = 132.0
-custom_fonts/font = ExtResource( 6 )
-text = "High Score: 0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PerdiLabel" type="RichTextLabel" parent="GameUI"]
-visible = false
-margin_right = 100.0
-margin_bottom = 100.0
-mouse_filter = 2
-custom_fonts/normal_font = ExtResource( 6 )
-bbcode_enabled = true
-bbcode_text = "
-[wave amp=100 freq=10][rainbow freq=0.5 sat=2 val=20]Perdi[/rainbow][/wave]"
-text = "
-Perdi"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="GameUI" parent="." instance=ExtResource( 3 )]
 
 [node name="GameTimer" type="Timer" parent="."]
 wait_time = 30.0
 
 [connection signal="cliked" from="Pucca" to="." method="_on_Pucca_cliked"]
 [connection signal="cliked" from="NegaPucca" to="." method="_on_NegaPucca_cliked"]
-[connection signal="pressed" from="GameUI/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="started" from="GameUI" to="." method="_on_GameUI_started"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]

@@ -9,10 +9,10 @@ enum PuccaType {
 
 signal cliked(pucca_type)
 
-onready var limit_nw: Position2D = get_node("../LimitNW")
-onready var limit_ne: Position2D = get_node("../LimitNE")
-onready var limit_se: Position2D = get_node("../LimitSE")
-onready var limit_sw: Position2D = get_node("../LimitSW")
+onready var limit_nw: Position2D = $Limits/LimitNW
+onready var limit_ne: Position2D = $Limits/LimitNE
+onready var limit_se: Position2D = $Limits/LimitSE
+onready var limit_sw: Position2D = $Limits/LimitSW
 
 export var pucca_type := PuccaType.PUCCA
 

@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "CanvasLayer",
+"class": "GameUI",
+"language": "GDScript",
+"path": "res://GameUI.gd"
+}, {
 "base": "Sprite",
 "class": "Pucca",
 "language": "GDScript",
 "path": "res://Pucca.gd"
 } ]
 _global_script_class_icons={
+"GameUI": "",
 "Pucca": ""
 }
 
