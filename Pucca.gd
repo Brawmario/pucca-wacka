@@ -14,6 +14,10 @@ onready var limit_ne: Position2D = $Limits/LimitNE
 onready var limit_se: Position2D = $Limits/LimitSE
 onready var limit_sw: Position2D = $Limits/LimitSW
 
+onready var circle: Area2D = $Circle
+
+onready var explosion_player: AnimationPlayer = $ExplosionPlayer
+
 export var pucca_type := PuccaType.PUCCA
 
 
@@ -27,6 +31,10 @@ func _ready():
 #	pass
 
 
+func set_click(clickable: bool) -> void:
+	circle.clickable = clickable
+
+
 func move_random():
 	position.x = rand_range(limit_nw.position.x, limit_ne.position.x)
 	position.y = rand_range(limit_nw.position.y, limit_sw.position.y)
@@ -35,24 +43,24 @@ func move_random():
 func kill_pucca():
 	var puccas: Array = get_tree().get_nodes_in_group("pucca")
 	for pucca in puccas:
-		pucca.get_node("Circle").clickable = false
+		pucca.set_click(false)
 	emit_signal("cliked", pucca_type)
-	$ExplosionPlayer.play("Explode")
-	yield($ExplosionPlayer, "animation_finished")
+	explosion_player.play("Explode")
+	yield(explosion_player, "animation_finished")
 	for pucca in puccas:
 		pucca.move_random()
-		pucca.get_node("Circle").clickable = true
+		pucca.set_click(true)
 
 
 func start_game() -> void:
 	visible = true
-	$Circle.clickable = true
+	set_click(true)
 	move_random()
 
 
 func end_game() -> void:
 	visible = false
-	$Circle.clickable = false
+	set_click(false)
 
 
 func _on_Circle_clicked() -> void:

@@ -1,7 +1,10 @@
 extends Node
 
-var save := {}
 const SAVE_PATH := "user://save.json"
+
+const MAIN_SCORE := "score1"
+
+var save := {}
 
 
 func _ready() -> void:
@@ -30,8 +33,8 @@ func clear_save() -> void:
 	save_to_file()
 
 func save_high_score(score: int) -> void:
-	if save.has("score1"):
-		save["score1"] = max(save["score1"], score)
+	if save.has(MAIN_SCORE):
+		save[MAIN_SCORE] = max(save[MAIN_SCORE], score)
 	else:
-		save["score1"] = score
+		save[MAIN_SCORE] = score
 	save_to_file()
