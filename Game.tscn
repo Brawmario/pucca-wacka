@@ -22,5 +22,6 @@ wait_time = 30.0
 
 [connection signal="cliked" from="Pucca" to="." method="_on_Pucca_cliked"]
 [connection signal="cliked" from="NegaPucca" to="." method="_on_NegaPucca_cliked"]
+[connection signal="cleared_save" from="GameUI" to="." method="_on_GameUI_cleared_save"]
 [connection signal="started" from="GameUI" to="." method="_on_GameUI_started"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]

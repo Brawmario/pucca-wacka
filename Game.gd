@@ -1,7 +1,7 @@
 extends Node2D
 
 
-var score := 0
+var score := Const.NO_SCORE
 var high_score := 0
 
 onready var game_ui: GameUI = $GameUI
@@ -10,10 +10,10 @@ onready var game_timer: Timer = $GameTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	game_ui.update_high_score(get_high_score())
 #	for pucca in get_tree().get_nodes_in_group("pucca"):
 #		var error = pucca.connect("clicked", self, "_on_pucca_cliked")
 #		print(error)
-	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,8 +49,12 @@ func end_game() -> void:
 
 
 func update_high_score() -> void:
-	high_score = max(high_score, score)
-	game_ui.update_high_score(high_score)
+	SaveManager.save_high_score(score)
+	game_ui.update_high_score(get_high_score())
+
+
+func get_high_score() -> int:
+	return SaveManager.save.get("score1", Const.NO_SCORE)
 
 
 func _on_GameTimer_timeout():
@@ -59,6 +63,11 @@ func _on_GameTimer_timeout():
 
 func _on_GameUI_started() -> void:
 	start_game()
+
+
+func _on_GameUI_cleared_save():
+	SaveManager.clear_save()
+	game_ui.update_high_score(get_high_score())
 
 
 #func _on_pucca_cliked(pucca_type) -> void:

@@ -3,12 +3,14 @@ class_name GameUI
 
 
 signal started
+signal cleared_save
 
 onready var score_label: RichTextLabel = $ScoreLabel
 onready var timer_label: Label = $TimerLabel
 onready var title_label: Label = $TitleLabel
 onready var high_score_label: Label = $HighScoreLabel
 onready var play_button: Button = $PlayButton
+onready var clear_button: Button = $ClearButton
 
 
 # Called when the node enters the scene tree for the first time.
@@ -33,7 +35,10 @@ func update_score(score: int) -> void:
 
 
 func update_high_score(score: int) -> void:
-	high_score_label.text = "High Score: " + str(score)
+	if score != Const.NO_SCORE:
+		high_score_label.text = "High Score: " + str(score)
+	else:
+		high_score_label.text = "High Score:"
 
 
 func add_perdi() -> void:
@@ -46,6 +51,7 @@ func add_perdi() -> void:
 
 func start_game() -> void:
 	play_button.visible = false
+	clear_button.visible = false
 	title_label.visible = false
 	high_score_label.visible = false
 
@@ -59,6 +65,7 @@ func end_game() -> void:
 	score_label.visible = false
 
 	play_button.visible = true
+	clear_button.visible = true
 	title_label.visible = true
 	high_score_label.visible = true
 
@@ -66,3 +73,8 @@ func end_game() -> void:
 func _on_PlayButton_pressed() -> void:
 	print("PlayButton pressed")
 	emit_signal("started")
+
+
+func _on_ClearButton_pressed():
+	print("ClearButton pressed")
+	emit_signal("cleared_save")

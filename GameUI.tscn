@@ -69,7 +69,7 @@ margin_left = -132.0
 margin_top = -48.0
 margin_right = 132.0
 custom_fonts/font = ExtResource( 2 )
-text = "High Score: 0"
+text = "High Score:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -89,4 +89,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ClearButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.9
+anchor_right = 0.5
+anchor_bottom = 0.9
+margin_left = -169.0
+margin_top = -54.0
+margin_right = 169.0
+custom_fonts/font = ExtResource( 2 )
+text = "Clear High Score"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="ClearButton" to="." method="_on_ClearButton_pressed"]

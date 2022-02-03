@@ -30,6 +30,11 @@ config/name="Pucca Wacka"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+SaveManager="*res://AutoLoad/SaveManager.gd"
+Const="*res://AutoLoad/Const.gd"
+
 [display]
 
 window/size/width=480
