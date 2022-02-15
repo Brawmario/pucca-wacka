@@ -43,7 +43,7 @@ jobs:
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: windows
-          ITCH_GAME: ${EXPORT_NAME}
+          ITCH_GAME: pucca-wacka
           ITCH_USER: brawmario
           PACKAGE: build/windows
           VERSION: ${{ github.ref_name }}
@@ -75,14 +75,14 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: linux
+          name: ${EXPORT_NAME}.linux.${{ github.ref_name }}
           path: build/linux
       - name: Butler Upload
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: linux
-          ITCH_GAME: ${EXPORT_NAME}
+          ITCH_GAME: pucca-wacka
           ITCH_USER: brawmario
           PACKAGE: build/linux
           VERSION: ${{ github.ref_name }}
@@ -114,14 +114,14 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: web
+          name: ${EXPORT_NAME}.web.${{ github.ref_name }}
           path: build/web
       - name: Butler Upload
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: web
-          ITCH_GAME: ${EXPORT_NAME}
+          ITCH_GAME: pucca-wacka
           ITCH_USER: brawmario
           PACKAGE: build/web
           VERSION: ${{ github.ref_name }}
@@ -158,14 +158,14 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: mac
+          name: ${EXPORT_NAME}.mac.${{ github.ref_name }}
           path: build/mac
       - name: Butler Upload
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: mac
-          ITCH_GAME: ${EXPORT_NAME}
+          ITCH_GAME: pucca-wacka
           ITCH_USER: brawmario
           PACKAGE: build/mac
           VERSION: ${{ github.ref_name }}
