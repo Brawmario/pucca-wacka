@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "CanvasLayer",
 "class": "GameUI",
 "language": "GDScript",
-"path": "res://GameUI.gd"
+"path": "res://GameUI/GameUI.gd"
 }, {
 "base": "Sprite",
 "class": "Pucca",
 "language": "GDScript",
-"path": "res://Pucca.gd"
+"path": "res://Pucca/Pucca.gd"
 } ]
 _global_script_class_icons={
 "GameUI": "",
@@ -52,4 +52,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 environment/default_environment="res://default_env.tres"

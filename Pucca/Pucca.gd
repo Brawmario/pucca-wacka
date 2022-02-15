@@ -18,7 +18,7 @@ onready var circle: Area2D = $Circle
 
 onready var explosion_player: AnimationPlayer = $ExplosionPlayer
 
-export var pucca_type := PuccaType.PUCCA
+export(PuccaType) var pucca_type = PuccaType.PUCCA
 
 
 # Called when the node enters the scene tree for the first time.
