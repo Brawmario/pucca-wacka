@@ -36,7 +36,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: ${EXPORT_NAME}.windows.${{ github.ref_name }}
+          name: windows.${{ github.ref_name }}
           path: build/windows
       - name: Butler Upload
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
@@ -75,7 +75,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: ${EXPORT_NAME}.linux.${{ github.ref_name }}
+          name: linux.${{ github.ref_name }}
           path: build/linux
       - name: Butler Upload
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
@@ -114,7 +114,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: ${EXPORT_NAME}.web.${{ github.ref_name }}
+          name: web.${{ github.ref_name }}
           path: build/web
       - name: Butler Upload
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
@@ -128,8 +128,8 @@ jobs:
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.3
         with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: build/web # The folder the action should deploy.
+          branch: gh-pages
+          folder: build/web
 
   export-mac:
     name: Mac Export
@@ -158,7 +158,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: ${EXPORT_NAME}.mac.${{ github.ref_name }}
+          name: mac.${{ github.ref_name }}
           path: build/mac
       - name: Butler Upload
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
