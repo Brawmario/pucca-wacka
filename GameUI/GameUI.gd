@@ -5,38 +5,28 @@ class_name GameUI
 signal started
 signal cleared_save
 
-onready var score_label: RichTextLabel = $ScoreLabel
-onready var timer_label: Label = $TimerLabel
-onready var title_label: Label = $TitleLabel
-onready var high_score_label: Label = $HighScoreLabel
-onready var play_button: Button = $PlayButton
-onready var clear_button: Button = $ClearButton
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+@onready var score_label: RichTextLabel = $ScoreLabel
+@onready var timer_label: Label = $TimerLabel
+@onready var title_label: Label = $TitleLabel
+@onready var high_score_label: Label = $HighScoreLabel
+@onready var play_button: Button = $PlayButton
+@onready var clear_button: Button = $ClearButton
 
 
 func update_timer(time: float) -> void:
 	if timer_label.visible:
-		timer_label.text = "Timer: " + str(floor(time))
+		timer_label.text = "Timer: %d" % floor(time)
 
 
 func update_score(score: int) -> void:
-	score_label.bbcode_text = "[wave amp=50 freq=40]Score: " + str(score) + "[/wave]"
-	yield(get_tree().create_timer(0.2), "timeout")
-	score_label.bbcode_text = "Score: " + str(score)
+	score_label.text = "[wave amp=50 freq=40]Score: %d[/wave]" % score
+	await get_tree().create_timer(0.2).timeout
+	score_label.text = "Score: %d" % score
 
 
 func update_high_score(score: int) -> void:
 	if score != Const.NO_SCORE:
-		high_score_label.text = "High Score: " + str(score)
+		high_score_label.text = "High Score: %d" % score
 	else:
 		high_score_label.text = "High Score:"
 
@@ -44,7 +34,7 @@ func update_high_score(score: int) -> void:
 func add_perdi() -> void:
 	var perdi: RichTextLabel = $PerdiLabel.duplicate()
 	perdi.add_to_group("perdi")
-	perdi.rect_position = Vector2(rand_range(0, 480 - 100), rand_range(0, 720 - 100))
+	perdi.position = Vector2(randf_range(0, 480 - 100), randf_range(0, 720 - 100))
 	add_child(perdi)
 	perdi.show()
 
@@ -55,7 +45,7 @@ func start_game() -> void:
 	title_label.visible = false
 	high_score_label.visible = false
 
-	score_label.bbcode_text = "Score: 0"
+	score_label.text = "Score: 0"
 	timer_label.visible = true
 	score_label.visible = true
 
@@ -71,10 +61,8 @@ func end_game() -> void:
 
 
 func _on_PlayButton_pressed() -> void:
-	print("PlayButton pressed")
-	emit_signal("started")
+	started.emit()
 
 
 func _on_ClearButton_pressed():
-	print("ClearButton pressed")
-	emit_signal("cleared_save")
+	cleared_save.emit()

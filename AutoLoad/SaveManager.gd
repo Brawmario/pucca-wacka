@@ -16,16 +16,18 @@ func load_save() -> void:
 	if not save_file.file_exists(SAVE_PATH):
 		return
 	save_file.open(SAVE_PATH, File.READ)
-	var json := JSON.parse(save_file.get_as_text())
-	if json.error == OK:
-		save = json.result
+	var json := JSON.new()
+	var err := json.parse(save_file.get_as_text())
+	if err == OK:
+		save = json.get_data()
 	save_file.close()
 
 
 func save_to_file() -> void:
 	var save_file := File.new()
+	var json := JSON.new()
 	save_file.open(SAVE_PATH, File.WRITE)
-	save_file.store_string(JSON.print(save, "\t"))
+	save_file.store_string(json.stringify(save, "\t"))
 	save_file.close()
 
 func clear_save() -> void:
