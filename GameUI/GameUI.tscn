@@ -1,108 +1,93 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://bgsl4uoaj2i0l"]
 
-[ext_resource path="res://GameUI/GameUI.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Fonts/STL.tres" type="DynamicFont" id=2]
-
+[ext_resource type="Script" path="res://GameUI/GameUI.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://cs7hscbes2bsh" path="res://Assets/Fonts/Some.Time.Later.otf" id="2_ugtdy"]
 
 [node name="GameUI" type="CanvasLayer"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="ScoreLabel" type="RichTextLabel" parent="."]
 visible = false
-anchor_right = 1.0
-margin_bottom = 50.0
-custom_colors/default_color = Color( 0.196078, 0.803922, 0.196078, 1 )
-custom_fonts/normal_font = ExtResource( 2 )
+offset_right = 250.0
+offset_bottom = 50.0
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 9.25
+theme_override_fonts/normal_font = ExtResource("2_ugtdy")
+theme_override_font_sizes/normal_font_size = 47
 bbcode_enabled = true
-bbcode_text = "Score: 0"
 text = "Score: 0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TimerLabel" type="Label" parent="."]
 visible = false
+anchor_left = 1.0
 anchor_right = 1.0
-margin_bottom = 48.0
-custom_colors/font_color = Color( 0.196078, 0.803922, 0.196078, 1 )
-custom_fonts/font = ExtResource( 2 )
+offset_left = -189.0
+offset_bottom = 51.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ugtdy")
+theme_override_font_sizes/font_size = 47
 text = "Timer: 30"
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PlayButton" type="Button" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -46.0
-margin_top = -27.0
-margin_right = 46.0
-margin_bottom = 27.0
-custom_fonts/font = ExtResource( 2 )
+offset_left = -46.0
+offset_top = -27.0
+offset_right = 46.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("2_ugtdy")
+theme_override_font_sizes/font_size = 47
 text = "Play"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TitleLabel" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 0.25
 anchor_right = 0.5
 anchor_bottom = 0.25
-margin_left = -129.0
-margin_right = 129.0
-margin_bottom = 48.0
-custom_fonts/font = ExtResource( 2 )
+offset_left = -129.0
+offset_right = 129.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("2_ugtdy")
+theme_override_font_sizes/font_size = 47
 text = "Mate o Pucca"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HighScoreLabel" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 0.75
 anchor_right = 0.5
 anchor_bottom = 0.75
-margin_left = -132.0
-margin_top = -48.0
-margin_right = 132.0
-custom_fonts/font = ExtResource( 2 )
+offset_left = -132.0
+offset_top = -48.0
+offset_right = 132.0
+theme_override_fonts/font = ExtResource("2_ugtdy")
+theme_override_font_sizes/font_size = 47
 text = "High Score:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PerdiLabel" type="RichTextLabel" parent="."]
 visible = false
-margin_right = 100.0
-margin_bottom = 100.0
+offset_right = 100.0
+offset_bottom = 100.0
 mouse_filter = 2
-custom_fonts/normal_font = ExtResource( 2 )
+theme_override_fonts/normal_font = ExtResource("2_ugtdy")
+theme_override_font_sizes/normal_font_size = 47
 bbcode_enabled = true
-bbcode_text = "
-[wave amp=100 freq=10][rainbow freq=0.5 sat=2 val=20]Perdi[/rainbow][/wave]"
 text = "
-Perdi"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[wave amp=100 freq=10][rainbow freq=0.5 sat=2 val=20]Perdi[/rainbow][/wave]"
 
 [node name="ClearButton" type="Button" parent="."]
 anchor_left = 0.5
 anchor_top = 0.9
 anchor_right = 0.5
 anchor_bottom = 0.9
-margin_left = -169.0
-margin_top = -54.0
-margin_right = 169.0
-custom_fonts/font = ExtResource( 2 )
+offset_left = -169.0
+offset_top = -54.0
+offset_right = 169.0
+theme_override_fonts/font = ExtResource("2_ugtdy")
+theme_override_font_sizes/font_size = 47
 text = "Clear High Score"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="ClearButton" to="." method="_on_ClearButton_pressed"]

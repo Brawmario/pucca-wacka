@@ -6,19 +6,19 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
-_global_script_classes=[ {
+_global_script_classes=[{
 "base": "CanvasLayer",
-"class": "GameUI",
-"language": "GDScript",
+"class": &"GameUI",
+"language": &"GDScript",
 "path": "res://GameUI/GameUI.gd"
 }, {
-"base": "Sprite",
-"class": "Pucca",
-"language": "GDScript",
+"base": "Sprite2D",
+"class": &"Pucca",
+"language": &"GDScript",
 "path": "res://Pucca/Pucca.gd"
-} ]
+}]
 _global_script_class_icons={
 "GameUI": "",
 "Pucca": ""
@@ -28,6 +28,7 @@ _global_script_class_icons={
 
 config/name="Pucca Wacka"
 run/main_scene="res://Game.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
 [autoload]
@@ -37,20 +38,13 @@ Const="*res://AutoLoad/Const.gd"
 
 [display]
 
+window/size/viewport_width=480
+window/size/viewport_height=720
+window/handheld/orientation=1
+window/stretch/mode="canvas_items"
 window/size/width=480
 window/size/height=720
-window/stretch/mode="2d"
-window/stretch/aspect="keep"
-
-[global]
-
-window=false
 
 [physics]
 
 common/enable_pause_aware_picking=true
-
-[rendering]
-
-quality/driver/driver_name="GLES2"
-environment/default_environment="res://default_env.tres"
