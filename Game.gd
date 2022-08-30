@@ -52,22 +52,22 @@ func get_high_score() -> int:
 	return SaveManager.save.get("score1", Const.NO_SCORE)
 
 
-func _on_GameTimer_timeout():
+func _on_game_timer_timeout() -> void:
 	end_game()
 
 
-func _on_GameUI_started() -> void:
+func _on_game_ui_started() -> void:
 	start_game()
 
 
-func _on_GameUI_cleared_save():
+func _on_game_ui_cleared_save() -> void:
 	SaveManager.clear_save()
 	game_ui.update_high_score(get_high_score())
 
 
-func _on_pucca_cliked(pucca_type):
+func _on_pucca_cliked() -> void:
 	update_score(1)
 
 
-func _on_nega_pucca_cliked(pucca_type):
+func _on_nega_pucca_cliked() -> void:
 	update_score(-1)

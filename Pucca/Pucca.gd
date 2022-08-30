@@ -7,18 +7,16 @@ enum PuccaType {
 	NEGA_PUCCA,
 }
 
-signal cliked(pucca_type)
+signal cliked()
+
+@export var pucca_type: PuccaType = PuccaType.PUCCA
 
 @onready var limit_nw: Marker2D = $Limits/LimitNW
 @onready var limit_ne: Marker2D = $Limits/LimitNE
 @onready var limit_se: Marker2D = $Limits/LimitSE
 @onready var limit_sw: Marker2D = $Limits/LimitSW
-
 @onready var circle: Area2D = $Circle
-
 @onready var explosion_player: AnimationPlayer = $ExplosionPlayer
-
-@export var pucca_type: PuccaType = PuccaType.PUCCA
 
 
 func set_click(clickable: bool) -> void:
@@ -34,7 +32,7 @@ func kill_pucca():
 	var puccas: Array = get_tree().get_nodes_in_group("pucca")
 	for pucca in puccas:
 		pucca.set_click(false)
-	cliked.emit(pucca_type)
+	cliked.emit()
 	explosion_player.play("Explode")
 	await explosion_player.animation_finished
 	for pucca in puccas:
@@ -53,5 +51,5 @@ func end_game() -> void:
 	set_click(false)
 
 
-func _on_Circle_clicked() -> void:
+func _on_circle_clicked() -> void:
 	kill_pucca()

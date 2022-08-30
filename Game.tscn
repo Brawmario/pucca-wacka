@@ -13,6 +13,7 @@ visible = false
 [node name="NegaPucca" parent="." instance=ExtResource("2")]
 visible = false
 self_modulate = Color(1, 0, 0, 1)
+pucca_type = 1
 
 [node name="GameUI" parent="." instance=ExtResource("3")]
 
@@ -21,6 +22,6 @@ wait_time = 30.0
 
 [connection signal="cliked" from="Pucca" to="." method="_on_pucca_cliked"]
 [connection signal="cliked" from="NegaPucca" to="." method="_on_nega_pucca_cliked"]
-[connection signal="cleared_save" from="GameUI" to="." method="_on_GameUI_cleared_save"]
-[connection signal="started" from="GameUI" to="." method="_on_GameUI_started"]
-[connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]
+[connection signal="cleared_save" from="GameUI" to="." method="_on_game_ui_cleared_save"]
+[connection signal="started" from="GameUI" to="." method="_on_game_ui_started"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
