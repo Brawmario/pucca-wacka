@@ -25,9 +25,8 @@ func load_save() -> void:
 
 func save_to_file() -> void:
 	var save_file := File.new()
-	var json := JSON.new()
 	save_file.open(SAVE_PATH, File.WRITE)
-	save_file.store_string(json.stringify(save, "\t"))
+	save_file.store_string(JSON.stringify(save, "\t"))
 	save_file.close()
 
 func clear_save() -> void:

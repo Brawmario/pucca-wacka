@@ -102,26 +102,26 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("..:rotation_degrees")
+tracks/0/path = NodePath("..:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [360.0]
+"values": [0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-360.0]
+"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_obb6d"]
@@ -132,7 +132,6 @@ _data = {
 }
 
 [node name="Pucca" type="Sprite2D" groups=["pucca"]]
-rotation = 6.28319
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3")
 script = ExtResource("1")
@@ -153,12 +152,10 @@ libraries = {
 [node name="ExplosionSheet" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-48.5714, -70.1749)
-rotation = -6.28319
 scale = Vector2(4.67143, 4.40125)
 texture = ExtResource("4")
 hframes = 5
 vframes = 4
-frame = 16
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5")
@@ -166,16 +163,16 @@ volume_db = -20.0
 
 [node name="Limits" type="Node" parent="."]
 
-[node name="LimitNE" type="Position2D" parent="Limits"]
+[node name="LimitNE" type="Marker2D" parent="Limits"]
 position = Vector2(404, 92)
 
-[node name="LimitNW" type="Position2D" parent="Limits"]
+[node name="LimitNW" type="Marker2D" parent="Limits"]
 position = Vector2(108, 92)
 
-[node name="LimitSE" type="Position2D" parent="Limits"]
+[node name="LimitSE" type="Marker2D" parent="Limits"]
 position = Vector2(404, 626)
 
-[node name="LimitSW" type="Position2D" parent="Limits"]
+[node name="LimitSW" type="Marker2D" parent="Limits"]
 position = Vector2(108, 626)
 
 [connection signal="clicked" from="Circle" to="." method="_on_Circle_clicked"]
