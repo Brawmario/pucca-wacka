@@ -175,5 +175,5 @@ position = Vector2(404, 626)
 [node name="LimitSW" type="Marker2D" parent="Limits"]
 position = Vector2(108, 626)
 
-[connection signal="clicked" from="Circle" to="." method="_on_Circle_clicked"]
-[connection signal="input_event" from="Circle" to="Circle" method="_on_Circle_input_event"]
+[connection signal="clicked" from="Circle" to="." method="_on_circle_clicked"]
+[connection signal="input_event" from="Circle" to="Circle" method="_on_circle_input_event"]

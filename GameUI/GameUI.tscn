@@ -19,6 +19,7 @@ text = "Score: 0"
 
 [node name="TimerLabel" type="Label" parent="."]
 visible = false
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -189.0
@@ -30,6 +31,7 @@ theme_override_font_sizes/font_size = 47
 text = "Timer: 30"
 
 [node name="PlayButton" type="Button" parent="."]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -43,6 +45,7 @@ theme_override_font_sizes/font_size = 47
 text = "Play"
 
 [node name="TitleLabel" type="Label" parent="."]
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.25
 anchor_right = 0.5
@@ -55,6 +58,7 @@ theme_override_font_sizes/font_size = 47
 text = "Mate o Pucca"
 
 [node name="HighScoreLabel" type="Label" parent="."]
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.75
 anchor_right = 0.5
@@ -78,6 +82,7 @@ text = "
 [wave amp=100 freq=10][rainbow freq=0.5 sat=2 val=20]Perdi[/rainbow][/wave]"
 
 [node name="ClearButton" type="Button" parent="."]
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.9
 anchor_right = 0.5
@@ -89,5 +94,5 @@ theme_override_fonts/font = ExtResource("2_ugtdy")
 theme_override_font_sizes/font_size = 47
 text = "Clear High Score"
 
-[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
-[connection signal="pressed" from="ClearButton" to="." method="_on_ClearButton_pressed"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="ClearButton" to="." method="_on_clear_button_pressed"]

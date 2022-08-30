@@ -60,7 +60,7 @@ func end_game() -> void:
 	high_score_label.visible = true
 
 
-func _on_PlayButton_pressed() -> void:
+func _on_play_button_pressed() -> void:
 	started.emit()
 
 
