@@ -9,10 +9,10 @@ enum PuccaType {
 
 signal cliked(pucca_type)
 
-@onready var limit_nw: Position2D = $Limits/LimitNW
-@onready var limit_ne: Position2D = $Limits/LimitNE
-@onready var limit_se: Position2D = $Limits/LimitSE
-@onready var limit_sw: Position2D = $Limits/LimitSW
+@onready var limit_nw: Marker2D = $Limits/LimitNW
+@onready var limit_ne: Marker2D = $Limits/LimitNE
+@onready var limit_se: Marker2D = $Limits/LimitSE
+@onready var limit_sw: Marker2D = $Limits/LimitSW
 
 @onready var circle: Area2D = $Circle
 
