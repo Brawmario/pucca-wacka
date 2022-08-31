@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dt2n1f5jse2q4"]
+[gd_scene load_steps=10 format=3 uid="uid://d4fjtek7ybaul"]
 
 [ext_resource type="Texture2D" uid="uid://cvp0ddnetxstx" path="res://assets/textures/puccaseal2.0.png" id="1_la13l"]
 [ext_resource type="Script" path="res://pucca/pucca.gd" id="2_fm6qm"]
