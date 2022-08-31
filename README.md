@@ -2,7 +2,7 @@
 
 Mate o Pucca
 
-![O Pucca](./Assets/Textures/puccaseal2.0.png)
+![O Pucca](./assets/textures/puccaseal2.0.png)
 
 Play it on [itch.io](https://brawmario.itch.io/pucca-wacka)
 
