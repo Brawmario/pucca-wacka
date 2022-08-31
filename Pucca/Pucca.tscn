@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cl78mkxvw6li5"]
+[gd_scene load_steps=10 format=3 uid="uid://dt2n1f5jse2q4"]
 
-[ext_resource type="Script" path="res://Pucca/Pucca.gd" id="1"]
-[ext_resource type="Script" path="res://Pucca/PuccaHitbox.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://cvp0ddnetxstx" path="res://Assets/Textures/puccaseal2.0.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://dlfwjc2u8nsw3" path="res://Assets/Textures/explosion.png" id="4"]
-[ext_resource type="AudioStream" uid="uid://cp8hdorqyodo7" path="res://Assets/Audio/explosion.ogg" id="5"]
+[ext_resource type="Texture2D" uid="uid://cvp0ddnetxstx" path="res://assets/textures/puccaseal2.0.png" id="1_la13l"]
+[ext_resource type="Script" path="res://pucca/pucca.gd" id="2_fm6qm"]
+[ext_resource type="Script" path="res://pucca/pucca_hitbox.gd" id="3_hnhy8"]
+[ext_resource type="Texture2D" uid="uid://dlfwjc2u8nsw3" path="res://assets/textures/explosion.png" id="4_407f5"]
+[ext_resource type="AudioStream" uid="uid://cp8hdorqyodo7" path="res://assets/audio/explosion.ogg" id="5_rol4t"]
 
 [sub_resource type="Animation" id="2"]
 resource_name = "Explode"
@@ -133,11 +133,11 @@ _data = {
 
 [node name="Pucca" type="Sprite2D" groups=["pucca"]]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("3")
-script = ExtResource("1")
+texture = ExtResource("1_la13l")
+script = ExtResource("2_fm6qm")
 
 [node name="Circle" type="Area2D" parent="."]
-script = ExtResource("2")
+script = ExtResource("3_hnhy8")
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Circle"]
 polygon = PackedVector2Array(-80.0016, -364, 19.9984, -352, 103.999, -320, 171.999, -272.001, 227.999, -212.001, 259.999, -156.001, 284, -92.0013, 296, -16.0013, 296, 51.9987, 284, 95.9987, 324, 107.999, 420.001, 183.998, 424.001, 239.998, 416.001, 255.998, 372.001, 263.998, 268.001, 223.999, 220.001, 263.999, 200.001, 247.999, 148.001, 291.999, 92.0015, 328, 24.0016, 352, -39.9984, 364, -127.998, 360.001, -203.999, 336.001, -271.999, 300.001, -327.999, 252.001, -375.999, 188.002, -412, 112.002, -428, 36.0019, -424, -51.9981, -404.001, -135.998, -356.001, -215.998, -296.001, -279.999, -224.001, -327.999, -156.002, -351.999)
@@ -153,12 +153,12 @@ libraries = {
 visible = false
 position = Vector2(-48.5714, -70.1749)
 scale = Vector2(4.67143, 4.40125)
-texture = ExtResource("4")
+texture = ExtResource("4_407f5")
 hframes = 5
 vframes = 4
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5")
+stream = ExtResource("5_rol4t")
 volume_db = -20.0
 
 [node name="Limits" type="Node" parent="."]

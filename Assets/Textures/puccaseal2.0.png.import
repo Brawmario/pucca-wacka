@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cvp0ddnetxstx"
-path="res://.godot/imported/puccaseal2.0.png-08d0a4ae7e4fa80103fd97fc07175f31.ctex"
+path="res://.godot/imported/puccaseal2.0.png-aadda4688d3d28988245e3be9613c1fa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/puccaseal2.0.png"
-dest_files=["res://.godot/imported/puccaseal2.0.png-08d0a4ae7e4fa80103fd97fc07175f31.ctex"]
+source_file="res://assets/textures/puccaseal2.0.png"
+dest_files=["res://.godot/imported/puccaseal2.0.png-aadda4688d3d28988245e3be9613c1fa.ctex"]
 
 [params]
 

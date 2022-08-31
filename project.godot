@@ -12,12 +12,12 @@ _global_script_classes=[{
 "base": "CanvasLayer",
 "class": &"GameUI",
 "language": &"GDScript",
-"path": "res://GameUI/GameUI.gd"
+"path": "res://game_ui/game_ui.gd"
 }, {
 "base": "Sprite2D",
 "class": &"Pucca",
 "language": &"GDScript",
-"path": "res://Pucca/Pucca.gd"
+"path": "res://pucca/pucca.gd"
 }]
 _global_script_class_icons={
 "GameUI": "",
@@ -27,14 +27,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Pucca Wacka"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
 [autoload]
 
-SaveManager="*res://AutoLoad/SaveManager.gd"
-Const="*res://AutoLoad/Const.gd"
+SaveManager="*res://auto_load/save_manager.gd"
+Const="*res://auto_load/const.gd"
 
 [display]
 
