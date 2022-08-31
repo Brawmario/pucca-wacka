@@ -29,7 +29,7 @@ _global_script_class_icons={
 config/name="Pucca Wacka"
 run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.0")
-config/icon="res://icon.png"
+config/icon="res://assets/textures/puccaseal2.0.png"
 
 [autoload]
 
