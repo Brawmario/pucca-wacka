@@ -64,5 +64,5 @@ func _on_play_button_pressed() -> void:
 	started.emit()
 
 
-func _on_ClearButton_pressed():
+func _on_clear_button_pressed():
 	cleared_save.emit()

@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cs7hscbes2bsh"
-path="res://.godot/imported/Some.Time.Later.otf-18bcc59d59824fe24366250a8cce5f63.fontdata"
+path="res://.godot/imported/some_time_later.otf-e64bd48cdec6339b36445be4ffac3292.fontdata"
 
 [deps]
 
-source_file="res://Assets/Fonts/Some.Time.Later.otf"
-dest_files=["res://.godot/imported/Some.Time.Later.otf-18bcc59d59824fe24366250a8cce5f63.fontdata"]
+source_file="res://assets/fonts/some_time_later.otf"
+dest_files=["res://.godot/imported/some_time_later.otf-e64bd48cdec6339b36445be4ffac3292.fontdata"]
 
 [params]
 
