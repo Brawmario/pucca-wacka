@@ -33,8 +33,8 @@ config/icon="res://assets/textures/puccaseal2.0.png"
 
 [autoload]
 
-SaveManager="*res://auto_load/save_manager.gd"
-Const="*res://auto_load/const.gd"
+SaveManager="*res://autoload/save_manager.gd"
+Const="*res://autoload/const.gd"
 
 [display]
 
