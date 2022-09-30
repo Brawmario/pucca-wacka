@@ -19,13 +19,14 @@ func load_save() -> void:
 		return
 
 	var data = JSON.parse_string(save_file.get_as_text())
-	if data:
-		if typeof(data) == TYPE_DICTIONARY:
-			save = data
-		else:
-			push_warning("Save JSON wasn't a valid dictionary")
-	else:
+	if typeof(data) == TYPE_NIL:
 		push_warning("Failed to parse save JSON")
+		return
+	if typeof(data) != TYPE_DICTIONARY:
+		push_warning("Save JSON wasn't a valid dictionary")
+		return
+
+	save = data
 
 
 func save_to_file() -> void:
