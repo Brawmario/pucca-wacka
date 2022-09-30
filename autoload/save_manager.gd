@@ -12,10 +12,9 @@ func _ready() -> void:
 
 
 func load_save() -> void:
-	var save_file := File.new()
-	var err := save_file.open(SAVE_PATH, File.READ)
-	if err:
-		if err != ERR_FILE_NOT_FOUND:
+	var save_file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if not save_file:
+		if FileAccess.get_open_error() != ERR_FILE_NOT_FOUND:
 			push_warning("Failed to open save file for reading")
 		return
 
@@ -28,17 +27,13 @@ func load_save() -> void:
 	else:
 		push_warning("Failed to parse save JSON")
 
-	save_file.close()
-
 
 func save_to_file() -> void:
-	var save_file := File.new()
-	var err := save_file.open(SAVE_PATH, File.WRITE)
-	if err:
+	var save_file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	if not save_file:
 		push_warning("Failed to open save file for writing")
 		return
 	save_file.store_string(JSON.stringify(save, "\t"))
-	save_file.close()
 
 
 func clear_save() -> void:
