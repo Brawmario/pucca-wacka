@@ -144,7 +144,7 @@ polygon = PackedVector2Array(-80.0016, -364, 19.9984, -352, 103.999, -320, 171.9
 
 [node name="ExplosionPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../ExplosionSheet")
-playback_speed = 4.0
+speed_scale = 4.0
 libraries = {
 "": SubResource("AnimationLibrary_obb6d")
 }
