@@ -8,22 +8,6 @@
 
 config_version=5
 
-_global_script_classes=[{
-"base": "CanvasLayer",
-"class": &"GameUI",
-"language": &"GDScript",
-"path": "res://game_ui/game_ui.gd"
-}, {
-"base": "Sprite2D",
-"class": &"Pucca",
-"language": &"GDScript",
-"path": "res://pucca/pucca.gd"
-}]
-_global_script_class_icons={
-"GameUI": "",
-"Pucca": ""
-}
-
 [application]
 
 config/name="Pucca Wacka"
