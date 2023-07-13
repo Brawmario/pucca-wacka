@@ -15,8 +15,11 @@ signal cliked()
 @onready var limit_ne: Marker2D = $Limits/LimitNE
 @onready var limit_se: Marker2D = $Limits/LimitSE
 @onready var limit_sw: Marker2D = $Limits/LimitSW
+
 @onready var circle: Area2D = $Circle
+
 @onready var explosion_player: AnimationPlayer = $ExplosionPlayer
+@onready var pucca_audio_stream_player: AudioStreamPlayer = $PuccaAudioStreamPlayer
 
 
 func set_click(clickable: bool) -> void:
@@ -33,6 +36,7 @@ func kill_pucca():
 	for pucca in puccas:
 		pucca.set_click(false)
 	cliked.emit()
+	pucca_audio_stream_player.pitch_scale = randf_range(0.8, 1.2)
 	explosion_player.play("Explode")
 	await explosion_player.animation_finished
 	for pucca in puccas:

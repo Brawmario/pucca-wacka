@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbobd7njve8l3"]
+[gd_scene load_steps=5 format=3 uid="uid://dbobd7njve8l3"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_2f4c7"]
 [ext_resource type="PackedScene" uid="uid://d4fjtek7ybaul" path="res://pucca/pucca.tscn" id="2_r14ej"]
+[ext_resource type="AudioStream" uid="uid://bh6vnq7oeqr3y" path="res://assets/audio/pucca_woo.ogg" id="3_etc2s"]
 [ext_resource type="PackedScene" uid="uid://bufv2dvvx7755" path="res://game_ui/game_ui.tscn" id="3_otw05"]
 
 [node name="Game" type="Node2D"]
@@ -15,6 +16,9 @@ visible = false
 self_modulate = Color(1, 0, 0, 1)
 pucca_type = 1
 
+[node name="PuccaAudioStreamPlayer" parent="NegaPucca" index="4"]
+stream = ExtResource("3_etc2s")
+
 [node name="GameUI" parent="." instance=ExtResource("3_otw05")]
 
 [node name="GameTimer" type="Timer" parent="."]
@@ -25,3 +29,5 @@ wait_time = 30.0
 [connection signal="cleared_save" from="GameUI" to="." method="_on_game_ui_cleared_save"]
 [connection signal="started" from="GameUI" to="." method="_on_game_ui_started"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
+
+[editable path="NegaPucca"]
