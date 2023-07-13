@@ -1,171 +1,80 @@
-name: godot-ci export
+name: Godot CI
 on:
   push:
     tags:
-      - 'v*.*.*'
-
-env:
-  GODOT_VERSION: 3.4.2
-  EXPORT_NAME: pucca-wacka
+      - 'v*'
 
 jobs:
-  export-windows:
-    name: Windows Export
+  export-game:
+    name: Export game
     runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:3.4.2
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+      - name: Export
+        id: export
+        uses: firebelley/godot-export@v5.2.0
         with:
-          lfs: true
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Install rsync 📚
-        run: |
-          apt-get update && apt-get install -y rsync
-      - name: Windows Build
-        run: |
-          mkdir ./${EXPORT_NAME}
-          rsync -Rr . ./${EXPORT_NAME}
-          mkdir -v -p build/windows
-          cd ${EXPORT_NAME}
-          godot -v --export "Windows Desktop" ../build/windows/${EXPORT_NAME}.exe
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.1/Godot_v4.1-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.1/Godot_v4.1-stable_export_templates.tpz
+          relative_project_path: ./
+          cache: true
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v3
         with:
-          name: windows.${{ github.ref_name }}
-          path: build/windows
+          name: ${{ github.event.repository.name }}.${{ github.ref_name }}.windows
+          path: ${{ steps.export.outputs.build_directory }}/Windows Desktop
+      - name: Upload MacOS artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.event.repository.name }}.${{ github.ref_name }}.mac
+          path: ${{ steps.export.outputs.build_directory }}/macOS
+      - name: Upload Linux artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.event.repository.name }}.${{ github.ref_name }}.linux
+          path: ${{ steps.export.outputs.build_directory }}/LinuxX11
+      - name: Upload Web artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.event.repository.name }}.${{ github.ref_name }}.web
+          path: ${{ steps.export.outputs.build_directory }}/Web
+
+  itch-io-upload:
+    name: Upload to Itch.io
+    needs: export-game
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform: [windows, mac, linux, web]
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ github.event.repository.name }}.${{ github.ref_name }}.${{ matrix.platform }}
       - name: Butler Upload
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-          CHANNEL: windows
-          ITCH_GAME: pucca-wacka
+          CHANNEL: ${{ matrix.platform }}
+          ITCH_GAME: ${{ github.event.repository.name }}
           ITCH_USER: brawmario
-          PACKAGE: build/windows
+          PACKAGE: .
           VERSION: ${{ github.ref_name }}
 
-  export-linux:
-    name: Linux Export
+  pages-deploy:
+    name: Deploy to GitHub Pages
+    needs: export-game
     runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:3.4.2
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+      - name: Download Artifact (web)
+        uses: actions/download-artifact@v3
         with:
-          lfs: true
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Install rsync 📚
-        run: |
-          apt-get update && apt-get install -y rsync
-      - name: Linux Build
-        run: |
-          mkdir ./${EXPORT_NAME}
-          rsync -Rr . ./${EXPORT_NAME}
-          mkdir -v -p build/linux
-          cd ${EXPORT_NAME}
-          godot -v --export "Linux/X11" ../build/linux/${EXPORT_NAME}.x86_64
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+          name: ${{ github.event.repository.name }}.${{ github.ref_name }}.web
+          path: export/web
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          name: linux.${{ github.ref_name }}
-          path: build/linux
-      - name: Butler Upload
-        uses: josephbmanley/butler-publish-itchio-action@v1.0.3
-        env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-          CHANNEL: linux
-          ITCH_GAME: pucca-wacka
-          ITCH_USER: brawmario
-          PACKAGE: build/linux
-          VERSION: ${{ github.ref_name }}
-
-  export-web:
-    name: Web Export
-    runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:3.4.2
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          lfs: true
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Install rsync 📚
-        run: |
-          apt-get update && apt-get install -y rsync
-      - name: Web Build
-        run: |
-          mkdir ./${EXPORT_NAME}
-          rsync -Rr . ./${EXPORT_NAME}
-          mkdir -v -p build/web
-          cd ${EXPORT_NAME}
-          godot -v --export "HTML5" ../build/web/index.html
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: web.${{ github.ref_name }}
-          path: build/web
-      - name: Butler Upload
-        uses: josephbmanley/butler-publish-itchio-action@v1.0.3
-        env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-          CHANNEL: web
-          ITCH_GAME: pucca-wacka
-          ITCH_USER: brawmario
-          PACKAGE: build/web
-          VERSION: ${{ github.ref_name }}
-      - name: Deploy to GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.2.3
-        with:
-          branch: gh-pages
-          folder: build/web
-
-  export-mac:
-    name: Mac Export
-    runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:3.4.2
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          lfs: true
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Install rsync 📚
-        run: |
-          apt-get update && apt-get install -y rsync
-      - name: Mac Build
-        run: |
-          mkdir ./${EXPORT_NAME}
-          rsync -Rr . ./${EXPORT_NAME}
-          mkdir -v -p build/mac
-          cd ${EXPORT_NAME}
-          godot -v --export "Mac OSX" ../build/mac/${EXPORT_NAME}.zip
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: mac.${{ github.ref_name }}
-          path: build/mac
-      - name: Butler Upload
-        uses: josephbmanley/butler-publish-itchio-action@v1.0.3
-        env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-          CHANNEL: mac
-          ITCH_GAME: pucca-wacka
-          ITCH_USER: brawmario
-          PACKAGE: build/mac
-          VERSION: ${{ github.ref_name }}
+          folder: export/web
