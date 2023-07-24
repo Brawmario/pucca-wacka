@@ -28,6 +28,13 @@ jobs:
           cache: true
           archive_output: true
           wine_path: ${{ steps.wine_install.outputs.WINE_PATH }}
+      - name: Rename archives
+        run: |
+          cd ${{ steps.export.outputs.archive_directory }}
+          mv "Windows Desktop.zip" "${{ github.event.repository.name }}.${{ github.ref_name }}.windows.zip"
+          mv "macOS.zip" "${{ github.event.repository.name }}.${{ github.ref_name }}.mac.zip"
+          mv "LinuxX11.zip" "${{ github.event.repository.name }}.${{ github.ref_name }}.linux.zip"
+          mv "Web.zip" "${{ github.event.repository.name }}.${{ github.ref_name }}.web.zip"
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
